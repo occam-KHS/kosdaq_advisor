@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import datetime
 import pickle
+import time
 
 def select_stocks(today_dt):
     today = datetime.datetime.strptime(today_dt, '%Y-%m-%d')
@@ -18,6 +19,7 @@ def select_stocks(today_dt):
 
     for code, name in zip(kosdaq_list['code'], kosdaq_list['name']):  # 코스닥 모든 종목에서 대하여 반복
         daily_price = fdr.DataReader(code, start=start_dt, end=today_dt)  # 종목, 일봉, 데이터 갯수
+        time.sleep(2)
         daily_price['code'] = code
         daily_price['name'] = name
         price_data = pd.concat([price_data, daily_price], axis=0)
