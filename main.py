@@ -1,7 +1,6 @@
 
-# import stock_selection
+
 import streamlit as st
-#import datetime
 import FinanceDataReader as fdr
 import pandas as pd
 import numpy as np
@@ -140,7 +139,7 @@ if __name__ == '__main__':
 
     if decision_date:
 
-        results = stock_selection.select_stocks(decision_date)
+        results = select_stocks(decision_date)
         results.rename(columns={'close':'buy_price'}, inplace=True)
         st.write(results.sort_values(by='yhat', ascending=False))
 
