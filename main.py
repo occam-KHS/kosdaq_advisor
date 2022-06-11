@@ -19,14 +19,14 @@ def select_stocks(today_dt):
 
     for code, name in zip(kosdaq_list['code'], kosdaq_list['name']):  # 코스닥 모든 종목에서 대하여 반복
         daily_price = fdr.DataReader(code, start=start_dt, end=today_dt)  # 종목, 일봉, 데이터 갯수
-        time.sleep(3)
+        time.sleep(3.5)
         daily_price['code'] = code
         daily_price['name'] = name
         price_data = pd.concat([price_data, daily_price], axis=0)
 
     price_data.index.name = 'date'
     price_data.columns = price_data.columns.str.lower()  # 컬럼 이름 소문자로 변경
-
+    time.sleep(3.5)
     kosdaq_index = fdr.DataReader('KQ11', start=start_dt, end=today_dt)  # 데이터 호출
     kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
     kosdaq_index.index.name = 'date'  # 인덱스 이름 생성
