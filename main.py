@@ -9,7 +9,7 @@ import time
 
 def select_stocks(today_dt):
     today = datetime.datetime.strptime(today_dt, '%Y-%m-%d')
-    start_dt = today - datetime.timedelta(days=100)  # 100 일전 데이터 부터 시작 - 피쳐 엔지니어링은 최소 60 개의 일봉이 필요함
+    start_dt = today - datetime.timedelta(days=90)  # 90 일전 데이터 부터 시작 - 피쳐 엔지니어링은 최소 60 개의 일봉이 필요함
     print(start_dt, today_dt)
 
     kosdaq_list = pd.read_pickle('kosdaq_list.pkl')
@@ -25,7 +25,7 @@ def select_stocks(today_dt):
     price_data.index.name = 'date'
     price_data.columns = price_data.columns.str.lower()  # 컬럼 이름 소문자로 변경
 
-    time.sleep(1)
+    # time.sleep(1)
     kosdaq_index = fdr.DataReader('KQ11', start=start_dt, end=today_dt)  # 데이터 호출
     kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
     kosdaq_index.index.name = 'date'  # 인덱스 이름 생성
