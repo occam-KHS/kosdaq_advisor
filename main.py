@@ -21,6 +21,7 @@ def select_stocks(today_dt):
         daily_price['code'] = code
         daily_price['name'] = name
         price_data = pd.concat([price_data, daily_price], axis=0)
+        time.sleep(5)
 
     price_data.index.name = 'date'
     price_data.columns = price_data.columns.str.lower()  # 컬럼 이름 소문자로 변경
