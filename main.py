@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 import FinanceDataReader as fdr
 import pandas as pd
@@ -7,6 +5,7 @@ import numpy as np
 import datetime
 import pickle
 import time
+
 
 def select_stocks(today_dt):
     today = datetime.datetime.strptime(today_dt, '%Y-%m-%d')
@@ -25,6 +24,7 @@ def select_stocks(today_dt):
 
     price_data.index.name = 'date'
     price_data.columns = price_data.columns.str.lower()  # 컬럼 이름 소문자로 변경
+
     time.sleep(1)
     kosdaq_index = fdr.DataReader('KQ11', start=start_dt, end=today_dt)  # 데이터 호출
     kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
