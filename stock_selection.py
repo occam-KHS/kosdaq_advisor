@@ -108,10 +108,7 @@ def select_stocks(today_dt):
     tops = X[X['yhat'] >= 0.3].sort_values(by='yhat', ascending=False)  # 스코어 0.3 이상 종목만
     print(len(tops))
 
-    tops['return_rank'] = pd.qcut(tops['return'], q=3, labels=range(3))  # 종가 수익률
-    tops['price_rank'] = pd.qcut(tops['price_z'], q=3, labels=range(3))  # 가격 변동성
-
-    select_tops = tops[(tops['return_rank'] == 2) & (tops['price_rank'] == 0)][
+    select_tops = tops[(tops['return'] > 1.03) & (tops['price_z'] < 0)][
         ['name', 'yhat','close']]
 
     if len(select_tops) > 1:  # 최소한 2개 종목 - 추천 리스크 분산
