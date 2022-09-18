@@ -1,4 +1,5 @@
 import FinanceDataReader as fdr
+import yfinance as yf
 import pandas as pd
 import numpy as np
 import datetime
@@ -7,7 +8,7 @@ import time
 
 def select_stocks(today_dt):
     today = datetime.datetime.strptime(today_dt, '%Y-%m-%d')
-    start_dt = today - datetime.timedelta(days=90)  # 90 일전 데이터 부터 시작 - 피쳐 엔지니어링은 최소 60 개의 일봉이 필요함
+    start_dt = today - datetime.timedelta(days=100)  # 90 일전 데이터 부터 시작 - 피쳐 엔지니어링은 최소 60 개의 일봉이 필요함
     print(start_dt, today_dt)
 
     kosdaq_list = pd.read_pickle('kosdaq_list.pkl')
@@ -24,8 +25,11 @@ def select_stocks(today_dt):
     price_data.columns = price_data.columns.str.lower()  # 컬럼 이름 소문자로 변경
 
     time.sleep(1)
-    kosdaq_index = fdr.DataReader('KQ11', start=start_dt, end=today_dt)  # 데이터 호출
-    kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
+    # kosdaq_index = fdr.DataReader('KQ11', start=start_dt, end=today_dt)  # 데이터 호출
+    # kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
+
+    kosdaq_index =  yf.download('^KQ11', start = start_dt)
+    kosdaq_index.columns = ['open','high','low','close','adj_close','volume'] # 컬럼명 변경
     kosdaq_index.index.name = 'date'  # 인덱스 이름 생성
     kosdaq_index.sort_index(inplace=True)  # 인덱스(날짜) 로 정렬
     kosdaq_index['kosdaq_return'] = kosdaq_index['close'] / kosdaq_index['close'].shift(1)  # 수익율 : 전 날 종가대비 당일 종가
