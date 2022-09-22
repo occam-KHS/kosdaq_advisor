@@ -20,6 +20,6 @@ if __name__ == '__main__':
 
         results = stock_selection.select_stocks(decision_date)
         results.rename(columns={'close':'buy_price'}, inplace=True)
-        st.write(results.sort_values(by='yhat', ascending=False).head(5))
+        st.write(results.sort_values(by='yhat', ascending=False).head(10))
 
 
