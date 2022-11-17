@@ -16,6 +16,10 @@ def select_stocks(today_dt):
     price_data = pd.DataFrame()
 
     for code, name in zip(kosdaq_list['code'], kosdaq_list['name']):  # 코스닥 모든 종목에서 대하여 반복
+
+        if ('스팩' in name):
+            continue
+
         daily_price = fdr.DataReader(code, start=start_dt, end=today_dt)  # 종목, 일봉, 데이터 갯수
         daily_price['code'] = code
         daily_price['name'] = name
