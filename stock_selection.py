@@ -11,7 +11,7 @@ def select_stocks(today_dt):
     start_dt = today - datetime.timedelta(days=100)  # 90 일전 데이터 부터 시작 - 피쳐 엔지니어링은 최소 60 개의 일봉이 필요함
     print(start_dt, today_dt)
 
-    kosdaq_list = pd.read_pickle('kosdaq_list.pkl')
+    kosdaq_list = pd.read_pickle('kosdaq_list2.pkl')
 
     price_data = pd.DataFrame()
 
