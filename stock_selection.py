@@ -25,11 +25,11 @@ def select_stocks(today_dt):
     price_data.columns = price_data.columns.str.lower()  # 컬럼 이름 소문자로 변경
 
     time.sleep(1)
-    # kosdaq_index = fdr.DataReader('KQ11', start=start_dt, end=today_dt)  # 데이터 호출
-    # kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
+    kosdaq_index = fdr.DataReader('229200', start=start_dt, end=today_dt)  # 데이터 호출
+    kosdaq_index.columns = ['close', 'open', 'high', 'low', 'volume', 'change']  # 컬럼명 변경
 
-    kosdaq_index =  yf.download('^KQ11', start = start_dt)
-    kosdaq_index.columns = ['open','high','low','close','adj_close','volume'] # 컬럼명 변경
+    # kosdaq_index =  yf.download('^KQ11', start = start_dt)
+    # kosdaq_index.columns = ['open','high','low','close','adj_close','volume'] # 컬럼명 변경
     kosdaq_index.index.name = 'date'  # 인덱스 이름 생성
     kosdaq_index.sort_index(inplace=True)  # 인덱스(날짜) 로 정렬
     kosdaq_index['kosdaq_return'] = kosdaq_index['close'] / kosdaq_index['close'].shift(1)  # 수익율 : 전 날 종가대비 당일 종가
