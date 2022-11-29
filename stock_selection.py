@@ -116,11 +116,10 @@ def select_stocks(today_dt):
     tops = X[X['yhat'] >= 0.3].sort_values(by='yhat', ascending=False)  # 스코어 0.3 이상 종목만
     print(len(tops))
 
-    select_tops = tops[(tops['return'] > 1.03) & (tops['price_z'] < 0)][
-        ['name', 'yhat','close']]
+    select_tops = tops[(tops['return'] > 1.03) & (tops['price_z'] < 0)][['name', 'yhat','close']]
 
-    if len(select_tops) > 1:  # 최소한 2개 종목 - 추천 리스크 분산
+    if len(select_tops) > 0:  # 최소한 2개 종목 - 추천 리스크 분산
         return select_tops
 
     else:
-        return None
+        return pd.DataFrame()
