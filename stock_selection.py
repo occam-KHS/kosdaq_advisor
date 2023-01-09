@@ -118,7 +118,7 @@ def select_stocks(today_dt):
 
     select_tops = tops[(tops['return'] > 1.03) & (tops['price_z'] < 0)][['name', 'yhat','close']]
 
-    if len(select_tops) > 0:  # 최소한 2개 종목 - 추천 리스크 분산
+    if len(select_tops) > 0:
         return select_tops
 
     else:
