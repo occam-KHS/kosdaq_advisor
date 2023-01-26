@@ -116,7 +116,7 @@ def select_stocks(today_dt):
     tops = X[X['yhat'] >= 0.3].sort_values(by='yhat', ascending=False)  # 스코어 0.3 이상 종목만
     print(len(tops))
 
-    select_tops = tops[(tops['return'].between(1.02, 1.06)) & (tops['price_z'].between(-1, 1))][['name', 'yhat', 'close', 'return', 'price_z']]
+    select_tops = tops[(tops['return'].between(1.02, 1.06)) & (tops['price_z'].between(-1, 0.5))][['name', 'yhat', 'close', 'return', 'price_z']]
 
     if len(select_tops) > 0:
         return select_tops
