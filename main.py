@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
         if glob.glob('kq_selection_' + decision_date +'.pkl'):
             kq_selection = pd.read_pickle('kq_selection_' + decision_date + '.pkl')
-            st.write('Extracting the results from the database ....')
+            st.write('Extracting results from the database ....')
             time.sleep(1)
             st.write(kq_selection.sort_values(by='yhat', ascending=False))
 
